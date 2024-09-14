@@ -21,6 +21,7 @@ SOLID is an acronym corresponding to:
 This principle states that a class should have only one reason to change, meaning it should have a single responsibility or purpose. The idea behind this is to make the code easier to implement and prevent unexpected side effects in future changes. It's much easier to maintain the code of a class, component, or microservice that has only one responsibility.
 
 <a href="https://github.com/mauro-sanchez/solid-examples/blob/master/en/S.rb" target="_blank">Example</a>
+
 ```rb
 # en/S.rb
 
@@ -65,6 +66,48 @@ end
 ### 2. OCP
 
 It states that classes should be open for extension but closed for modification. In other words, classes can be extended without modifying their code. This prevents situations where a change in one class requires adapting all dependent classes. The core idea is that if you need to implement something new, it's possible to create a subclass that adds new functionalities without modifying the original class.
+
+<a href="https://github.com/mauro-sanchez/solid-examples/blob/master/en/O.rb" target="_blank">Example</a>
+
+```rb
+# en/O.rb
+
+# Bad practive
+class Arthropod
+  def initialize(type)
+    @type = type
+  end
+
+  def legs_quantity
+    if @tipo == 'arachnid'
+      8
+    elsif @tipo == 'insect'
+      6
+    end
+  end
+end
+
+# OCP practice
+
+class Arthropod
+  def legs_quantity
+    raise NotImplementedError, 'This method must be implemented in a subclass'
+  end
+end
+
+class Arachnid < Arthropod
+  def legs_quantity
+    8
+  end
+end
+
+class Insect < Arthropod
+  def legs_quantity
+    6
+  end
+end
+
+```
 
 ### 3. LSP
 

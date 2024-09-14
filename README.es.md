@@ -68,6 +68,48 @@ end
 
 Establece que las clases deben estar abiertas para extensión, pero cerradas para modificación. Es decir, las clases pueden ser extendidas sin tener que modificar su código. Esto previene situaciones en las que un cambio en una de tus clases hace que tengas que adaptar todas las clases dependientes. En el fondo, la idea es que si necesitas implementar algo nuevo, es posible crear una subclase que añada las nuevas funcionalidades, sin modificar la clase original.
 
+<a href="https://github.com/mauro-sanchez/solid-examples/blob/master/es/O.rb" target="_blank">Ejemplo</a>
+
+```rb
+# es/O.rb
+
+# Mala práctica
+
+class Artropodo
+  def initialize(tipo)
+    @tipo = tipo
+  end
+
+  def cantidad_patas
+    if @tipo == 'arácnido'
+      8
+    elsif @tipo == 'insecto'
+      6
+    end
+  end
+end
+
+# Buena práctica OCP
+
+class Artropodo
+  def cantidad_patas
+    raise NotImplementedError, 'Este método debe ser implementado por una subclase'
+  end
+end
+
+class Aracnido < Artropodo
+  def cantidad_patas
+    8
+  end
+end
+
+class Insecto < Artropodo
+  def cantidad_patas
+    6
+  end
+end
+```
+
 ### 3. LSP
 
 Este principio corresponde a que una subclase debería ser sustituible por su clase base sin alterar el comportamiento esperado. Por ejemplo, si heredas de una clase, la clase hijo o subclase deben poder usarse en lugar de la clase base sin causar errores. Es decir, si yo estoy usando una clase para una funcionalidad, yo debería ser capaz de utilizar cualquier subclase que herede de la clase sin romper la aplicación.
