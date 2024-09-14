@@ -1,4 +1,6 @@
 # Principios SOLID
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/mauro-sanchez/solid-examples/blob/master/README.md)
+[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/mauro-sanchez/solid-examples/blob/master/README.es.md)
 
 Ejemplos de uso de los principios SOLID en Ruby
 
