@@ -20,6 +20,48 @@ SOLID is an acronym corresponding to:
 
 This principle states that a class should have only one reason to change, meaning it should have a single responsibility or purpose. The idea behind this is to make the code easier to implement and prevent unexpected side effects in future changes. It's much easier to maintain the code of a class, component, or microservice that has only one responsibility.
 
+<a href="https://github.com/mauro-sanchez/solid-examples/blob/master/en/S.rb" target="_blank">Example</a>
+```rb
+# en/S.rb
+
+# Bad practice
+class User
+  def initialize(name, last_name, email)
+    @name = name
+    @last_name = last_name
+    @email = email
+  end
+
+  def full_name
+    "#{@name} #{@last_name}"
+  end
+
+  def send_welcome_email
+    # Logic to send a welcome email
+  end
+end
+
+# SRP practices
+
+class User
+  def initialize(name, last_name, email)
+    @name = name
+    @last_name = last_name
+    @email = email
+  end
+
+  def full_name
+    "#{@name} #{@last_name}"
+  end
+end
+
+class EmailService
+  def send_welcome_email(user)
+    # Logic to send a welcome email
+  end
+end
+```
+
 ### 2. OCP
 
 It states that classes should be open for extension but closed for modification. In other words, classes can be extended without modifying their code. This prevents situations where a change in one class requires adapting all dependent classes. The core idea is that if you need to implement something new, it's possible to create a subclass that adds new functionalities without modifying the original class.
