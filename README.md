@@ -61,6 +61,7 @@ class EmailService
     # Logic to send a welcome email
   end
 end
+
 ```
 
 ### 2. OCP
@@ -113,9 +114,49 @@ end
 
 This principle states that a subclass should be substitutable for its base class without altering the expected behavior. For example, if you inherit from a class, the child class or subclass should be usable in place of the base class without causing errors. In other words, if I'm using a class for a functionality, I should be able to use any subclass that inherits from it without breaking the application.
 
+<a href="https://github.com/mauro-sanchez/solid-examples/blob/master/en/L.rb" target="_blank">Example</a>
+
+```rb
+# en/L.rb
+
+# Bad practice
+class Car
+  def passenger_capacity
+    5
+  end
+end
+
+class ToyCar < Car
+  def passenger_capacity
+    raise "Toy cars can't have passengers"
+  end
+end
+
+# Good LSP practice
+
+class Car
+  def passenger_capacity
+    5
+  end
+end
+
+class Toy
+  def play
+    # Play logic here
+  end
+end
+
+class ToyCar < Toy
+  # Doesn't need passenger_capacity method
+end
+
+```
+
 ### 4. ISP
 
 Classes should not depend on interfaces they do not use. This principle can be tricky in Ruby because explicit interfaces do not exist in this language. However, it can still be applied by avoiding the creation of classes with methods that other classes do not need. For instance, if you need to implement a new functionality in a class that one of its subclasses cannot use, it would be best to create an intermediate subclass that implements the necessary changes.
+
+
 
 ### 5. DIP
 

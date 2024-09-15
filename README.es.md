@@ -62,6 +62,7 @@ class EmailService
     # Lógica de enviar un correo de bienvenida
   end
 end
+
 ```
 
 ### 2. OCP
@@ -108,11 +109,50 @@ class Insecto < Artropodo
     6
   end
 end
+
 ```
 
 ### 3. LSP
 
 Este principio corresponde a que una subclase debería ser sustituible por su clase base sin alterar el comportamiento esperado. Por ejemplo, si heredas de una clase, la clase hijo o subclase deben poder usarse en lugar de la clase base sin causar errores. Es decir, si yo estoy usando una clase para una funcionalidad, yo debería ser capaz de utilizar cualquier subclase que herede de la clase sin romper la aplicación.
+
+<a href="https://github.com/mauro-sanchez/solid-examples/blob/master/es/L.rb" target="_blank">Ejemplo</a>
+
+```rb
+# es/L.rb
+
+# Mala práctica
+class Auto
+  def cantidad_pasajeros
+    5
+  end
+end
+
+class AutoJuguete < Auto
+  def cantidad_pasajeros
+    raise 'Los autos de juguete no llevan pasajeros'
+  end
+end
+
+# Buena práctica LSP
+
+class Auto
+  def cantidad_pasajeros
+    5
+  end
+end
+
+class Juguete
+  def jugar
+    # Lógica de juego
+  end
+end
+
+class AutoJuguete < Juguete
+  # No necesita el método cantidad de pasajeros
+end
+
+```
 
 ### 4. ISP
 
