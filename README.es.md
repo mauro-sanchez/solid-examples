@@ -158,6 +158,52 @@ end
 
 Las clases no deberían depender de interfaces que no usan. Este principio puede complicarse en Ruby, debido a que no existen las interfaces explícitas. Pero es posible llevarlo a cabo evitando crear clases con métodos que otras clases no necesiten. Es decir, si necesitamos implementar una nueva funcionalidad a una clase, que una de sus subclases no puede utilizar, entonces lo mejor sería crear una subclase intermedia, que implemente los cambios necesarios.
 
+<a href="https://github.com/mauro-sanchez/solid-examples/blob/master/es/I.rb" target="_blank">Ejemplo</a>
+
+```rb
+# es/I.rb
+
+# Mala práctica
+class Camara
+  def sacar_fotografia
+    raise NotImplementedError
+  end
+
+  def grabar_video
+    raise NotImplementedError
+  end
+end
+
+# Acá esta cámara no necesita el método grabar_video, pero está obligada a implementalo
+
+class CamaraFotografica < Camara
+  def sacar_fotografia
+    'Capturando imagen...'
+  end
+end
+
+# Buena práctica ISP
+
+class Camara
+  def sacar_fotografia
+    raise NotImplementedError
+  end
+end
+
+class Videocamara
+  def grabar_video
+    raise NotImplementedError
+  end
+end
+
+class CamaraFotografica < Camara
+  def sacar_fotografia
+    'Capturando imagen...'
+  end
+end
+
+```
+
 ### 5. DIP
 
-Este principio establece que los módulos o clases de alto nivel no deberían depender de módulos de bajo nivel, ya que ambos deberían depender de abstracciones. Además, estas abstracciones no deberían depender de detalles; los detalles deberían depender de las abstracciones. 
+Este principio establece que los módulos o clases de alto nivel no deberían depender de módulos de bajo nivel, ya que ambos deberían depender de abstracciones. Además, estas abstracciones no deberían depender de detalles; los detalles deberían depender de las abstracciones.

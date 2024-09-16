@@ -156,7 +156,51 @@ end
 
 Classes should not depend on interfaces they do not use. This principle can be tricky in Ruby because explicit interfaces do not exist in this language. However, it can still be applied by avoiding the creation of classes with methods that other classes do not need. For instance, if you need to implement a new functionality in a class that one of its subclasses cannot use, it would be best to create an intermediate subclass that implements the necessary changes.
 
+<a href="https://github.com/mauro-sanchez/solid-examples/blob/master/en/I.rb" target="_blank">Example</a>
 
+```rb
+# en/I.rb
+
+# Bad practice
+class Camera
+  def take_picture
+    raise NotImplementedError
+  end
+
+  def record_video
+    raise NotImplementedError
+  end
+end
+
+# Here this camera doesn't need the record_video method, but it is required to implement it
+
+class PhotographyCamera < Camera
+  def take_picture
+    'Taking picture...'
+  end
+end
+
+# Good practice ISP
+
+class Camera
+  def take_picture
+    raise NotImplementedError
+  end
+end
+
+class VideoRecorder
+  def record_video
+    raise NotImplementedError
+  end
+end
+
+class PhotographyCamera < Camera
+  def take_picture
+    'Taking picture...'
+  end
+end
+
+```
 
 ### 5. DIP
 
